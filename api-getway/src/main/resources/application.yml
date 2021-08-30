@@ -1,0 +1,24 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:
+    gateway:
+      routes:
+        - id: product-web
+          uri: lb://product-web
+          predicates:
+            - Path=/product/**
+            
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/user/**
+            
+        - id: auth-web
+          uri: lb://auth-web
+          predicates:
+            - Path=/api/auth/**
+            
